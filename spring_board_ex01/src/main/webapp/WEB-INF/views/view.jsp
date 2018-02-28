@@ -83,16 +83,11 @@ a:hover{ color:black;text-decoration:none; }
 	var pnum = ${textNum};
 	
 	// 페이지메이커(임시)
-	var ppm;
-	
-	//
-	var nowPage;
+	var ppm;	
 	
 	// 댓글을 표시하는 함수(매개변수: 페이지 번호)
 	function getRepList(rpage){	
 		$.getJSON("/board/replies/"+pnum+"/"+rpage, function(data){
-			
-			nowPage = rpage;
 			
 			// 댓글 출력 틀이 될 변수
 			var str = "";		
