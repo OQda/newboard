@@ -6,11 +6,11 @@ Welcome to My Board!
 
 ----------
 
-1. 게시물 기능
--------------
-----------
+### 1. 게시물 기능
 
-### 글쓰기 기능
+
+글쓰기 기능
+-------------
 
 ![enter image description here](https://github.com/OQda/newboard/blob/master/2018-02-28%2016;48;50.PNG?raw=true)
 
@@ -24,7 +24,8 @@ Welcome to My Board!
 
 -------------
 
-### 글 조회 기능
+글 조회 기능
+-------------
 
 ![enter image description here](https://github.com/OQda/newboard/blob/master/2018-02-28%2016;52;12.PNG?raw=true)
 
@@ -32,8 +33,8 @@ Welcome to My Board!
 
 ----------
 
-
-### 글 수정 기능
+글 수정 기능
+-------------
 
 ![enter image description here](https://github.com/OQda/newboard/blob/master/2018-02-28%2016;53;52.PNG?raw=true)
 
@@ -45,7 +46,8 @@ Welcome to My Board!
 
 ---------
 
-### 글 삭제 기능
+글 삭제 기능
+-------------
 
 ![enter image description here](https://github.com/OQda/newboard/blob/master/2018-02-28%2017;07;57.PNG?raw=true)
 
@@ -53,20 +55,20 @@ Welcome to My Board!
 
 ---------
 
-2. 댓글 기능
---------------------
+### 2. 댓글 기능
 
 ---------
 
-### 댓글 추가 기능
+댓글 추가 기능
+-------------
 
 ![enter image description here](https://github.com/OQda/newboard/blob/master/2018-02-28%2017;10;54.PNG?raw=true)
 
 글 조회 페이지에서 댓글을 입력한 후 등록버튼을 누르면 댓글이 추가됩니다.
 
 ---------
-
-### 댓글 페이지
+댓글 페이지
+-------------
 
 ![enter image description here](https://github.com/OQda/newboard/blob/master/2018-02-28%2017;14;02.PNG?raw=true)
 
@@ -76,7 +78,8 @@ Welcome to My Board!
 
 ---------
 
-### 댓글 수정 기능
+댓글 수정 기능
+-------------
 
 ![enter image description here](https://github.com/OQda/newboard/blob/master/2018-02-28%2017;17;04.PNG?raw=true)
 
@@ -86,7 +89,8 @@ Welcome to My Board!
 
 ---------
 
-### 댓글 삭제 기능
+댓글 삭제 기능
+-------------
 
 ![enter image description here](https://github.com/OQda/newboard/blob/master/2018-02-28%2017;18;28.PNG?raw=true)
 
