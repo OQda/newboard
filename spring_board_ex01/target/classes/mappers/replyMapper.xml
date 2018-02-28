@@ -14,6 +14,7 @@
     			cast(wdate as char) as wdate
     	from spring_replist
     	where pnum = #{pnum}
+    	order by rno desc
     	limit #{cri.pageStart}, #{cri.perPageNum}
     </select>
     

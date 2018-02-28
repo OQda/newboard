@@ -13,9 +13,9 @@ table.type09 {
 	width:600px;
 	max-width: 600px;
 	border: 2px solid #ccc;
-    border-collapse: collapse;
-    text-align: left;
-    line-height: 1;
+   	border-collapse: collapse;
+	text-align: left;
+	line-height: 1;
 	font-size: 12px;
 }
 table.type09 thead th {
@@ -27,7 +27,7 @@ table.type09 thead th {
 }
 table.type09 tbody th {
 	width:50px;
-    padding: 10px;
+	padding: 10px;
 	text-align: center;
     border-bottom: 1px solid #ccc;
     background: #f3f6f7;
@@ -144,7 +144,7 @@ a:hover{ color:black;text-decoration:none; }
 			
 			// 총 댓글 페이지 수 변수에 저장
 			totalRepPage = Math.ceil(cnt / 10.0);
-			//alert(totalRepPage);
+			//alert(totalRepPage); 
 			
 			// 총 댓글 수를 jsp에 표시
 			$("#ccount").html("댓글 "+cnt);
@@ -186,7 +186,7 @@ a:hover{ color:black;text-decoration:none; }
 					if (result == 'SUCCESS') {
 						getRepCount();
 						printPaging(ppm);
-						getRepList(totalRepPage);
+						getRepList(1);
 						$("#wid").val("");
 						$("#wtext").val("");
 	
