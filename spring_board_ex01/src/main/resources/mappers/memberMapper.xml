@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.myboard.mappers.memberMapper">
+ 
+ 	<!-- 
+        mybatis-config.xml의 typeAlias에 등록해두지 않았다면 
+        
+        <select id="selectMember" resultType="com.example.dto.MemberVO" >
+            SELECT ID, PW ,NAME FROM TEST
+        </select>
+        
+        이렇게 해야 한다.
+    -->
+    
+    <!-- 게시글 전체 조회 (페이지 없이 그냥 전체목록을 불러온다)
+    <select id="selectText" parameterType="OneData" resultType="OneData">
+        select num, title, context, id, count, cast(wdate as char) as wdate 
+        from spring_boardlist
+        order by num desc, wdate desc
+    </select>
+    -->
+    
+    <!-- 게시글 일부분 조회 (limit로 지정) 
+    <select id="listPage" resultType="OneData">
+    <![CDATA[
+	    select num, title, context, id, count, cast(wdate as char) as wdate
+	    from spring_boardlist
+	    order by num desc, wdate desc
+	    limit 0,10
+    ]]>    
+    </select>
+    -->
+    
+    <!-- 글쓰기 -->
+    <insert id="insertText">
+    	insert into spring_boardlist (title, context, id)
+    	values(#{title}, #{context}, #{id})
+    </insert>
+    
+    <!-- 글 하나를 클릭해서 조회 -->
+    <select id="viewText" parameterType="OneData" resultType="OneData">    
+        select num,
+        		title,
+        		context,
+        		id,
+        		count,
+        		cast(wdate as char) as wdate
+        from spring_boardlist
+        where num = #{textNum}
+    </select>
+    
+    <!-- 조회수 증가 -->
+    <update id="cntPlus">
+    	update spring_boardlist set count=count+1 where num = #{textNum}
+    </update>
+    
+    <!-- 글 조회 후 수정 -->
+    <update id="updateText">
+    	update spring_boardlist set title=#{title}, context=#{context} where num = #{num}
+    </update>
+    
+    <!-- 글 조회 후 삭제 -->
+    <delete id="deleteText">
+    	delete from spring_boardlist where num = #{textNum}
+    </delete>   
+    
+    <!-- GET방식으로  시작 페이지 / 페이지당 글 수를 받아 limit에 지정 -->
+    <select id="listCriteria" resultType="OneData">
+    <![CDATA[
+	    select num,
+	    		title, 
+	    		context, 
+	    		id, 
+	    		count, 
+	    		cast(wdate as char) as wdate,
+	    		(select count(*) from spring_replist where pnum=num) as rep
+	    from spring_boardlist
+	    order by num desc, wdate desc
+	    limit #{pageStart}, #{perPageNum}
+    ]]>
+    </select>
+    
+    <!-- 전체 게시물 숫자 카운트 -->
+    <select id="countPaging" resultType="int">
+		select count(*) from spring_boardlist
+    </select>    
+    
+</mapper>
