@@ -17,7 +17,6 @@ Welcome to My Board!
 
 글쓰기 버튼을 누르면 입력할 수 있는 창이 뜹니다.
 
-----------
 
 ![enter image description here](https://github.com/OQda/newboard/blob/master/2018-02-28%2016;50;15.PNG?raw=true)
 
