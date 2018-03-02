@@ -73,6 +73,7 @@ Welcome to My Board!
 ![enter image description here](https://github.com/OQda/newboard/blob/master/2018-02-28%2017;14;02.PNG?raw=true)
 
 댓글은 한번에 10개까지 출력됩니다.
+
 만약 댓글의 숫자가 10개 이상이 되면 페이지를 넘길 수 있는
 버튼이 생성되어 다음 내용을 볼 수 있습니다.
 
@@ -84,6 +85,7 @@ Welcome to My Board!
 ![enter image description here](https://github.com/OQda/newboard/blob/master/2018-02-28%2017;17;04.PNG?raw=true)
 
 댓글에서 수정 버튼을 누르면 댓글을 수정할 수 있는 창이 뜹니다.
+
 수정할 내용을 입력한 후 등록 버튼을 누르면
 댓글이 수정되는 것을 확인할 수 있습니다.
 
