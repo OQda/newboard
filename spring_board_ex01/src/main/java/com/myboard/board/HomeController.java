@@ -1,12 +1,15 @@
 package com.myboard.board;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
 
+import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -16,8 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.myboard.dao.B_DAO;
-import com.myboard.dto.OneData;
-import com.myboard.dto.OneRep;
+import com.myboard.dao.B_DAOImpl;
+//import com.myboard.dto.OneData;
+import com.myboard.hiber.OneData;
 
 /**
  * Handles requests for the application home page.
@@ -29,6 +33,11 @@ public class HomeController {
 	private B_DAO dao;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+		
+	@Before
+	public void setUp() {
+		dao = new B_DAOImpl();
+	}
 	
 	// 수정 완료 후 view로 리다이렉트 된 경우를 체크하기 위한 변수
 	private String updCheck = "none";
@@ -50,8 +59,10 @@ public class HomeController {
 		
 		// OneData = 게시물 하나하나의 정보(글번호, 제목 등)가 담긴 Class
 		// listCriteria = Criteria 클래스를 이용해 전체 게시물 목록에서 해당 페이지만을 불러오는 쿼리가 담긴 메소드
-		List<OneData> list = dao.listCriteria(cri);		
-		model.addAttribute("textList", list);		
+//		List<OneData> list = dao.listCriteria(cri);		
+		
+		List<OneData> users = dao.hiberListCri(cri);		
+		model.addAttribute("textList", users);		
 		
 		// PageMaker = 하단의 페이지 번호를 만들어주는 Class
 		// 게시물 총 데이터 수와 Criteria 클래스의 정보를 통해 계산을 해서 보여준다
@@ -91,15 +102,26 @@ public class HomeController {
 	
 	// 글쓰기에서 쓰기를 눌렀을 때 - insertText를 통해 DB에 insert를 실제로 수행
 	@RequestMapping(method = RequestMethod.POST, value="/insertgo")
-	public String insertgo(OneData od, Model model) {			
+	public String insertgo(OneData od, Model model) {
 		
+		Calendar cal = Calendar.getInstance();
+		Timestamp now = new Timestamp(cal.getTime().getTime());		
+				
 		// temp라는 새로운 OneData 객체를 생성하여 inputform에서 받아온 데이터를 적용시켜 준 후
 		// insertText라는 메소드를 통해 DB에 넣어준다
+//		OneData temp = new OneData();
+//		temp.setId(od.getId());
+//		temp.setTitle(markMod(od.getTitle()));
+//		temp.setContext(markMod(od.getContext()));
+//		dao.insertText(temp);
+		
 		OneData temp = new OneData();
 		temp.setId(od.getId());
-		temp.setTitle(markMod(od.getTitle()));
-		temp.setContext(markMod(od.getContext()));
-		dao.insertText(temp);
+		temp.setTitle(od.getTitle());
+		temp.setContext(od.getContext());
+		temp.setWdate(now);
+		
+		dao.hiberInsert(temp);
 		
 		return "redirect:list";
 		

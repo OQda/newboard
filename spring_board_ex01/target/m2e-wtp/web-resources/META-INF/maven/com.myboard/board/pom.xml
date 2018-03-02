@@ -20,7 +20,7 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.8.4</version>
 		</dependency>
-	
+			
 		<!-- MySQL -->
         <dependency>
             <groupId>mysql</groupId>
@@ -153,7 +153,18 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.20</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.5.Final</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>

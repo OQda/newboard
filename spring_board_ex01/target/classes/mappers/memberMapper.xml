@@ -47,7 +47,7 @@
         		context,
         		id,
         		count,
-        		cast(wdate as char) as wdate
+        		wdate
         from spring_boardlist
         where num = #{textNum}
     </select>
@@ -75,7 +75,7 @@
 	    		context, 
 	    		id, 
 	    		count, 
-	    		cast(wdate as char) as wdate,
+	    		wdate,
 	    		(select count(*) from spring_replist where pnum=num) as rep
 	    from spring_boardlist
 	    order by num desc, wdate desc

@@ -42,6 +42,6 @@ public class OneRep {
 
 	public void setWdate(String wdate) {
 		this.wdate = wdate;
-	}
+	}	
 
 }

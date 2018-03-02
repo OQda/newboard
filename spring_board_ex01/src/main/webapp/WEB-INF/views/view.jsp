@@ -354,7 +354,7 @@ a:hover{ color:black;text-decoration:none; }
 		</thead>
         <tbody>		
 		<tr><th scope=row>글쓴이</th><td>${textList.id}</td></tr>
-		<tr><th scope=row>작성일</th><td>${textList.wdate}</td></tr>
+		<tr><th scope=row>작성일</th><td>${textList.pdate}</td></tr>
 		<tr><th scope=row>조회수</th><td>${textList.count}</td></tr>
 		<tr><th scope=row>내용</th><td>${textList.context}</td></tr>
 		</tbody>        

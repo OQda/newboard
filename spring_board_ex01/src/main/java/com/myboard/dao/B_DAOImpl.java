@@ -7,11 +7,16 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.myboard.board.Criteria;
-import com.myboard.dto.OneData;
+//import com.myboard.dto.OneData;
 import com.myboard.dto.OneRep;
+import com.myboard.hiber.HibernateUtil;
+import com.myboard.hiber.OneData;
+
 
 @Repository
 public class B_DAOImpl implements B_DAO{
@@ -33,7 +38,19 @@ public class B_DAOImpl implements B_DAO{
 		// TODO Auto-generated method stub
 		sqlSession.insert(Namespace+".insertText", write);
 	}
-
+	
+	@Override
+	public void hiberInsert(OneData write) {
+		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSf().openSession();
+		Transaction tx = session.beginTransaction();
+		
+		session.persist(write);
+		
+		tx.commit();
+		session.close();
+	}
+	
 	@Override
 	public OneData viewText(int textNum) {
 		// TODO Auto-generated method stub
@@ -77,6 +94,25 @@ public class B_DAOImpl implements B_DAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(Namespace+".listCriteria", cri);
 	}
+	
+	@Override
+	public List<OneData> hiberListCri(Criteria cri) {		
+		// TODO Auto-generated method stub
+		
+		Session session = HibernateUtil.getSf().openSession();
+				
+		String sql = "from OneData order by num desc, wdate desc";
+		
+		List users = session.createQuery(sql)
+							.setFirstResult(cri.getPageStart())
+							.setMaxResults(cri.getPerPageNum())
+							.list();
+
+		session.close();
+		
+		return users;
+				
+	}	
 
 	@Override
 	public int countPaging(Criteria cri) {
@@ -119,5 +155,9 @@ public class B_DAOImpl implements B_DAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(Repspace+".countReply", pnum);
 	}
+
+	
+
+	
 
 }

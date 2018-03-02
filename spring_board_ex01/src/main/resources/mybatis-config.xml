@@ -5,7 +5,7 @@
     <configuration>
     
     	<typeAliases>
-            <typeAlias type="com.myboard.dto.OneData" alias="OneData"/>
+            <typeAlias type="com.myboard.hiber.OneData" alias="OneData"/>
             <typeAlias type="com.myboard.dto.OneRep" alias="OneRep"/>
         </typeAliases>
         

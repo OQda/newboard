@@ -73,6 +73,11 @@ a:visited{ color:black;text-decoration:none; }
 a:hover{ color:black;text-decoration:none; }
 .list:hover { color:black;text-decoration:underline; }
 </style>
+<script>
+function dCut(value){
+	return value.substring(0,19);
+}
+</script>
 </head>
 <body>
 <center>
@@ -96,7 +101,7 @@ a:hover{ color:black;text-decoration:none; }
                     </td>
                     <td>${text.id}</td>
                     <td>${text.count}</td>
-                    <td>${text.wdate}</td>
+                    <td>${text.pdate}</td>
                 </tr>
             </c:forEach>
         </tbody>

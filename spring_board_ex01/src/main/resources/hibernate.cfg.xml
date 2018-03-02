@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    	<property name="hibernate.connection.url">jdbc:mysql://192.168.23.101:33060?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=utf8</property>
+    	<property name="hibernate.connection.username">root</property>
+    	<property name="hibernate.connection.password">sorkdlru1</property>
+    	<property name="hibernate.default_schema">kopoctc</property>
+    	<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    	<mapping resource="com/myboard/hiber/OneData.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>
