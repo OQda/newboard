@@ -1,11 +1,15 @@
 package com.myboard.hiber;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 public class OneData {
 	private int num, count, rep;
 	private String title, context, id, pdate;
 	private Timestamp wdate;
+	
+	Calendar cal = Calendar.getInstance();
+	Timestamp now = new Timestamp(cal.getTime().getTime());		
 
 	public int getNum() {
 		return num;
@@ -63,14 +67,22 @@ public class OneData {
 		this.rep = rep;
 	}
 
-	public String getPdate() {		
-		return wdate.toString().substring(0,19);
+	public String getPdate() {
+		String n = now.toString().substring(0,10);
+		String w = wdate.toString().substring(0,10);
+		String p = "";
+		
+		if (n.equals(w)) {
+			p = wdate.toString().substring(11,16);
+		}else {
+			p = w;
+		}
+		
+		return p;
 	}
 
 	public void setPdate() {
 		this.pdate = wdate.toString().substring(0,19);
 	}
-
 	
-
 }

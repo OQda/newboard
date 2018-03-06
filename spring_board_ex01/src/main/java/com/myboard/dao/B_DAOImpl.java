@@ -100,6 +100,7 @@ public class B_DAOImpl implements B_DAO{
 		// TODO Auto-generated method stub
 		
 		Session session = HibernateUtil.getSf().openSession();
+		Transaction tx = session.beginTransaction();
 				
 		String sql = "from OneData order by num desc, wdate desc";
 		
@@ -107,7 +108,8 @@ public class B_DAOImpl implements B_DAO{
 							.setFirstResult(cri.getPageStart())
 							.setMaxResults(cri.getPerPageNum())
 							.list();
-
+		
+		tx.commit();		
 		session.close();
 		
 		return users;

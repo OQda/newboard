@@ -83,6 +83,29 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping(value = "/m/list", method = RequestMethod.GET)
+	public String mlist(Criteria cri, Model model) throws Exception {
+		
+		this.viewCnt = "outview";
+		
+		model.addAttribute("cri", cri);
+		
+		List<OneData> users = dao.hiberListCri(cri);		
+		model.addAttribute("textList", users);		
+		
+		PageMaker pm = new PageMaker();
+		pm.setCri(cri);
+		pm.setTotalCount(dao.countPaging(cri));
+		
+		if ( cri.getPage() > pm.getEndPage() ) {
+			return "redirect:list?page="+Integer.toString(pm.getEndPage());
+		}
+		model.addAttribute("pageMaker", pm);
+		
+		return "mlist";
+		
+	}
+	
 	// 글쓰기 버튼을 눌렀을 때 - 글쓰기 form으로 이동
 	@RequestMapping("insert")
 	public String insert() {	

@@ -73,11 +73,6 @@ a:visited{ color:black;text-decoration:none; }
 a:hover{ color:black;text-decoration:none; }
 .list:hover { color:black;text-decoration:underline; }
 </style>
-<script>
-function dCut(value){
-	return value.substring(0,19);
-}
-</script>
 </head>
 <body>
 <center>
