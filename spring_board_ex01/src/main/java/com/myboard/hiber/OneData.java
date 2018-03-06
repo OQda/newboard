@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 public class OneData {
 	private int num, count, rep;
-	private String title, context, id, pdate;
+	private String title, context, id, pdate, indate;
 	private Timestamp wdate;
 	
 	Calendar cal = Calendar.getInstance();
@@ -83,6 +83,14 @@ public class OneData {
 
 	public void setPdate() {
 		this.pdate = wdate.toString().substring(0,19);
+	}
+
+	public String getIndate() {
+		return wdate.toString().substring(0,16);
+	}
+
+	public void setIndate() {
+		this.indate = wdate.toString().substring(0,16);
 	}
 	
 }

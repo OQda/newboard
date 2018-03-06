@@ -29,7 +29,7 @@
 
 <ul class="list">
 	<c:forEach items="${textList}" var="text">
-		<li class="list-item list-item--tappable" onclick=location.href='/board/view/${text.num}?page=${cri.page}'>
+		<li class="list-item list-item--tappable" onclick=location.href='view/${text.num}?page=${cri.page}'>
 			<div class="list-item__center">
 				<div class="list-item__title">
         			${text.title} <c:if test="${text.rep != 0 }">[${text.rep}]</c:if>

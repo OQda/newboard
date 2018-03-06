@@ -207,6 +207,26 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping("m/view/{textNum}")
+	public String mview(@PathVariable int textNum, Criteria cri, Model model) throws Exception {
+		
+		if ( "none".equals(updCheck) && "outview".equals(viewCnt) ) {
+			dao.cntplus(textNum);			
+			this.viewCnt = "inview";
+		}else{			
+			this.updCheck = "none";
+		}
+		
+		model.addAttribute("textNum", textNum);		
+		model.addAttribute("cri", cri);
+		
+		OneData list = dao.viewText(textNum);		
+		model.addAttribute("textList", list);	
+				
+		return "mview";
+		
+	}
+	
 	// view 페이지에서 수정을 눌렀을 때 - 현재 글의 제목과 내용 정보를 가지고 업데이트 form으로 이동
 	@RequestMapping("update/{textNum}")
 	public String update(@PathVariable int textNum, Criteria cri, Model model) throws Exception {				

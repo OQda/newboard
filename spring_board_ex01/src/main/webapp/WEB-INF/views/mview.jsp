@@ -4,10 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<!-- jQuery 2.1.4 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initail-scale=1, sc">
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+<script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+<title>Board - Mobile ver</title>
 <style>
 table.type09 {
 	width:600px;
@@ -344,44 +346,57 @@ a:hover{ color:black;text-decoration:none; }
 </script>
 </head>
 <body>
-<center>
-	<table class=type09>
-        <thead>
-			<tr>
-				<th scope=cols align=center>제목</th>
-				<th scope=cols id=nowrap>${textList.title}</th>
-			</tr>
-		</thead>
-        <tbody>		
-		<tr><th scope=row>글쓴이</th><td>${textList.id}</td></tr>
-		<tr><th scope=row>작성일</th><td>${textList.indate}</td></tr>
-		<tr><th scope=row>조회수</th><td>${textList.count}</td></tr>
-		<tr><th scope=row>내용</th><td>${textList.context}</td></tr>
-		</tbody>        
-    </table>
-    <table cellpadding=5>
-    	<tr align=center>
-    		<td>
-    			<input type=button value="목록" onclick=window.location='/board/list?page=${cri.page}'>    			
-    		</td>
-    		<td>
-    			<input type=button value="수정" onclick=window.location='/board/update/${textNum}?page=${cri.page}'>
-    		</td>    		
-    		<td>
-    			<input type=button value="삭제" onclick=window.location='/board/delete/${textNum}?page=${cri.page}'>
-    		</td>
-    	</tr>
-    </table>
+
+<!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+<div class="toolbar">
+  <div class="toolbar__left">
+    <span class="toolbar-button toolbar-button--quiet" onclick=window.location='/board/m/list?page=${cri.page}'>
+      <i class="ion-android-arrow-back" style="font-size:32px; vertical-align:-6px;"></i>
+    </span>
+  </div>
+
+  <div class="toolbar__center">
+  	 글 제목
+  </div>
+
+  <div class="toolbar__right">
+		<input type=button value="수정" class="toolbar-button toolbar-button--outline" 
+		onclick=window.location='/board/update/${textNum}?page=${cri.page}'>
+		<input type=button value="삭제" class="toolbar-button toolbar-button--outline" 
+		onclick=window.location='/board/m/delete/${textNum}?page=${cri.page}'>
+  </div>
+</div>
+
+<ul class="list list--noborder">
+  <li class="list-item">
+    <div class="list-item__center">
+    	<div class="list-item__title" style="font-size:20px;">
+					${textList.title}
+		</div>
+    	<div class="list-item__subtitle" style="padding: 7px 5px 0px 3px;">
+			<div style="float:left;">${textList.id}</div>
+			<div style="float:right;">${textList.indate}</div>
+		</div>
+		<div class="list-item__subtitle" style="padding: 3px 5px 0px 3px;"> <!-- 위 / 오른쪽 / 아래 / 왼쪽 -->
+			조회 : ${textList.count}
+		</div>
+    </div>
+  </li>
+  <li class="list-item">
+    <div class="list-item__center">
+		${textList.context}
+    </div>
+  </li>
+</ul>
+
+<ul class="list">
+  <li class="list-header">
+    <div style="float:left;" id=ccount></div>
+    <div style="float:right;padding-right:20px;" id=repPage></div>
+  </li>
+</ul>
     
-    <table class=type09>
-        <thead>
-            <tr>
-            	<!-- 댓글 수 출력 -->
-                <th><div id=ccount></div></th>
-                <!-- 페이지 출력 -->
-                <th><div id=repPage></div></th>                            
-            </tr>
-        </thead>
+    <table class=type09>       
         <tbody>
     	<tr>
     		<td id=input>
@@ -395,6 +410,6 @@ a:hover{ color:black;text-decoration:none; }
         <tbody id=replies>        
         </tbody>
     </table>
-</center>
+
 </body>
 </html>
