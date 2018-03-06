@@ -59,10 +59,10 @@ public class HomeController {
 		
 		// OneData = 게시물 하나하나의 정보(글번호, 제목 등)가 담긴 Class
 		// listCriteria = Criteria 클래스를 이용해 전체 게시물 목록에서 해당 페이지만을 불러오는 쿼리가 담긴 메소드
-//		List<OneData> list = dao.listCriteria(cri);		
+		List<OneData> list = dao.listCriteria(cri);		
 		
-		List<OneData> users = dao.hiberListCri(cri);		
-		model.addAttribute("textList", users);		
+//		List<OneData> list = dao.hiberListCri(cri);		
+		model.addAttribute("textList", list);		
 		
 		// PageMaker = 하단의 페이지 번호를 만들어주는 Class
 		// 게시물 총 데이터 수와 Criteria 클래스의 정보를 통해 계산을 해서 보여준다
@@ -83,15 +83,16 @@ public class HomeController {
 		
 	}
 	
-	@RequestMapping(value = "/m/list", method = RequestMethod.GET)
+	@RequestMapping(value = "m/list", method = RequestMethod.GET)
 	public String mlist(Criteria cri, Model model) throws Exception {
 		
 		this.viewCnt = "outview";
 		
 		model.addAttribute("cri", cri);
 		
-		List<OneData> users = dao.hiberListCri(cri);		
-		model.addAttribute("textList", users);		
+		List<OneData> list = dao.listCriteria(cri);
+//		List<OneData> list = dao.hiberListCri(cri);		
+		model.addAttribute("textList", list);		
 		
 		PageMaker pm = new PageMaker();
 		pm.setCri(cri);
@@ -110,6 +111,11 @@ public class HomeController {
 	@RequestMapping("insert")
 	public String insert() {	
 		return "inputform";		
+	}
+	
+	@RequestMapping("m/insert")
+	public String minsert() {	
+		return "minputform";		
 	}
 	
 	//큰따옴표, 꺽쇠, 주석, 줄바꿈 기호
@@ -138,6 +144,24 @@ public class HomeController {
 //		temp.setContext(markMod(od.getContext()));
 //		dao.insertText(temp);
 		
+		OneData temp = new OneData();
+		temp.setId(od.getId());
+		temp.setTitle(od.getTitle());
+		temp.setContext(od.getContext());
+		temp.setWdate(now);
+		
+		dao.hiberInsert(temp);
+		
+		return "redirect:list";
+		
+	}	
+	
+	@RequestMapping(method = RequestMethod.POST, value="m/insertgo")
+	public String minsertgo(OneData od, Model model) {
+		
+		Calendar cal = Calendar.getInstance();
+		Timestamp now = new Timestamp(cal.getTime().getTime());		
+
 		OneData temp = new OneData();
 		temp.setId(od.getId());
 		temp.setTitle(od.getTitle());

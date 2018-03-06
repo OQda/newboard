@@ -10,21 +10,12 @@
 <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
 <title>Board - Mobile ver</title>
-<style>
-
-</style>
-<script>
-
-</script>
 </head>
 <body>
 
 <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
 <div class="toolbar">
-  <div class="toolbar__left">
-    <span class="toolbar-button toolbar-button--outline">
-      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
-    </span>
+  <div class="toolbar__left">    
   </div>
 
   <div class="toolbar__center">
@@ -38,7 +29,7 @@
 
 <ul class="list">
 	<c:forEach items="${textList}" var="text">
-		<li class="list-item list-item--tappable">
+		<li class="list-item list-item--tappable" onclick=location.href='/board/view/${text.num}?page=${cri.page}'>
 			<div class="list-item__center">
 				<div class="list-item__title">
         			${text.title} <c:if test="${text.rep != 0 }">[${text.rep}]</c:if>
