@@ -118,18 +118,7 @@ public class HomeController {
 	public String minsert(Criteria cri, Model model) {
 		model.addAttribute("cri", cri);
 		return "minputform";		
-	}
-	
-	//큰따옴표, 꺽쇠, 주석, 줄바꿈 기호
-	public String markMod(String before) {
-		String after = before.replaceAll("&","&amp")
-				.replaceAll("\"","&quot")
-				.replaceAll(" ","&nbsp")
-				.replaceAll("<","&lt")
-				.replaceAll(">","&gt")
-				.replaceAll("\n","<br>");
-		return after;
-	}
+	}	
 	
 	// 글쓰기에서 쓰기를 눌렀을 때 - insertText를 통해 DB에 insert를 실제로 수행
 	@RequestMapping(method = RequestMethod.POST, value="/insertgo")
@@ -202,7 +191,9 @@ public class HomeController {
 		model.addAttribute("cri", cri);
 		
 		// 게시물 하나에 대한 데이터를 받아온다
-		OneData list = dao.viewText(textNum);		
+		OneData list = dao.viewText(textNum);
+		String modc = markMod(list.getContext());
+		list.setContext(modc);
 		model.addAttribute("textList", list);	
 				
 		return "view";
@@ -222,7 +213,9 @@ public class HomeController {
 		model.addAttribute("textNum", textNum);		
 		model.addAttribute("cri", cri);
 		
-		OneData list = dao.viewText(textNum);		
+		OneData list = dao.viewText(textNum);
+		String modc = markMod(list.getContext());
+		list.setContext(modc);
 		model.addAttribute("textList", list);	
 				
 		return "mview";
@@ -244,6 +237,18 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping("m/update/{textNum}")
+	public String mupdate(@PathVariable int textNum, Criteria cri, Model model) throws Exception {				
+		
+		model.addAttribute("cri", cri);
+		
+		OneData list = dao.viewText(textNum);		
+		model.addAttribute("textList", list);
+		
+		return "mupdate";
+		
+	}
+	
 	// form에 입력된 내용을 바탕으로하여 updateText를 통해 실제 update를 수행
 	@RequestMapping(method = RequestMethod.POST, value="/update/updatego")
 	public String updatego(OneData od, Criteria cri, Model model) {
@@ -251,14 +256,29 @@ public class HomeController {
 		// insert시와 마찬가지로 새로운 OneData 객체를 생성해 데이터를 세팅
 		OneData temp = new OneData();
 		temp.setNum(od.getNum());
-		temp.setTitle(markMod(od.getTitle()));
-		temp.setContext(markMod(od.getContext()));
+		temp.setTitle(od.getTitle());
+		temp.setContext(od.getContext());
 		dao.updateText(temp);
 		
 		this.updCheck = "update";
 				
 		// 수정 완료시 수정을 진행한 view 페이지로 리다이렉트 한다. (페이지 정보까지 가지고 감)
 		return "redirect:/view/"+od.getNum()+"?page="+cri.getPage();
+		
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value="/m/update/updatego")
+	public String mupdatego(OneData od, Criteria cri, Model model) {
+				
+		OneData temp = new OneData();
+		temp.setNum(od.getNum());
+		temp.setTitle(od.getTitle());
+		temp.setContext(od.getContext());
+		dao.updateText(temp);
+		
+		this.updCheck = "update";
+				
+		return "redirect:/m/view/"+od.getNum()+"?page="+cri.getPage();
 		
 	}
 	
@@ -271,6 +291,15 @@ public class HomeController {
 		// 삭제되었을 때도 그 글이 원래 있던 페이지로 돌아와야 하기 때문에 위에서 페이지 정보를 받아와 return에 적용시켜준다 
 		return "redirect:/list?page="+cri.getPage();		
 	}	
+	
+	@RequestMapping("m/delete/{textNum}")
+	public String mdelete(@PathVariable int textNum, Criteria cri) {				
+		
+		dao.deleteText(textNum);
+		
+		// 삭제되었을 때도 그 글이 원래 있던 페이지로 돌아와야 하기 때문에 위에서 페이지 정보를 받아와 return에 적용시켜준다 
+		return "redirect:/m/list?page="+cri.getPage();		
+	}
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -289,9 +318,15 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("test")
-	public void ajaxTest() {		
-		
+	//큰따옴표, 꺽쇠, 주석, 줄바꿈 기호
+	public String markMod(String before) {
+		String after = before.replaceAll("&","&amp")
+				.replaceAll("\"","&quot")
+				.replaceAll(" ","&nbsp")
+				.replaceAll("<","&lt")
+				.replaceAll(">","&gt")
+				.replaceAll("\n","<br>");
+		return after;
 	}
 	
 }

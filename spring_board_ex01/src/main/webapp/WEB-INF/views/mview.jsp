@@ -269,6 +269,7 @@ a:hover{ color:black;text-decoration:none; }
 </script>
 </head>
 <body>
+<ons-page>
 
 <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
 <div class="toolbar">
@@ -284,7 +285,7 @@ a:hover{ color:black;text-decoration:none; }
 
   <div class="toolbar__right">
 		<span class="toolbar-button toolbar-button--outline" 
-		onclick=window.location='/board/update/${textNum}?page=${cri.page}'>수정</span>		
+		onclick=window.location='/board/m/update/${textNum}?page=${cri.page}'>수정</span>		
 		<span class="toolbar-button toolbar-button--outline" 
 		onclick=window.location='/board/m/delete/${textNum}?page=${cri.page}'>삭제</span>	
   </div>
@@ -334,5 +335,6 @@ a:hover{ color:black;text-decoration:none; }
 
 <ul class="list" id=replies></ul>
 
+</ons-page>
 </body>
 </html>

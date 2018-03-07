@@ -58,8 +58,6 @@ public class OneData {
 
 	public void setRep(int rep) {
 		this.rep = rep;
-	}
-
-	
+	}	
 
 }
