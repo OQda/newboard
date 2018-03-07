@@ -4,77 +4,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initail-scale=1, sc">
+<meta name="viewport" content="width=device-width, initail-scale=1">
 <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
 <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
 <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
 <title>Board - Mobile ver</title>
 <style>
-table.type09 {
-	width:600px;
-	max-width: 600px;
-	border: 2px solid #ccc;
-   	border-collapse: collapse;
-	text-align: left;
-	line-height: 1;
-	font-size: 12px;
-}
-table.type09 thead th {
-	text-align:left;
-    padding: 10px;
-    font-weight: bold;
-    color: black;
-    border-bottom: 3px solid black;
-}
-table.type09 tbody th {
-	width:50px;
-	padding: 10px;
-	text-align: center;
-    border-bottom: 1px solid #ccc;
-    background: #f3f6f7;
-}
-table.type09 td {
-	width:510px;
-	max-width:510px;	
-    padding: 5px 10px 5px 10px;    	
-    line-height: 1.7;
-    border-bottom: 1px solid #ccc;
-    
-}
-.btn, .type09{
-	text-align:right;
-}
-#input{
-	white-space:nowrap;
-	width:100px;
-	text-align:left;
-}
-#nowrap{
-	width:500px;
-	max-width:500px;
-	text-overflow:ellipsis;
-	white-space:nowrap;
-	overflow:hidden;
-}
-#modDiv{
-	border: 1px solid gray;
-	width: 575px;
-	height: 70%;
-	background-color: white;
-	position: absolute;
-	top: 30%;
-}
-#modForm{	
-	position: relative;
-}
-#textline{
-	width:500px;
-	max-width:500px;
-	word-break:break-word;
-	word-break:break-all;
-}
-
 a:link{ color:black;text-decoration:none; }
 a:visited{ color:black;text-decoration:none; }
 a:hover{ color:black;text-decoration:none; }
@@ -98,26 +34,13 @@ a:hover{ color:black;text-decoration:none; }
 			// data.list = 컨트롤러의 맵에 list로 담긴 댓글 데이터
 			$(data.list).each(
 					function() {
-						str += "<tr data-rno='"+ this.rno +"'>"
-								+"<td>"
-									+"<div id=modForm>"
-									+ "<div>" + this.id+ "</div>"
-									+ "<div id=textline class='repText'>" + this.text + "</div>"
-									+ "<div>" + this.wdate + "</div>"							
-										+"<div id=modDiv"+this.rno+" style='display:none;border: 1px solid gray;"
-												+"width: 575px;height: 70%;background-color: white;position: absolute;"
-												+"top: 30%;'>"
-											+"<input type=text id=text"+this.rno+" style='width:450px; height:85%;'>"										
-											+"　 <input type=button class='repmodGo' value='등록'>"
-											+"　<input type=button class='repCancel' value='취소'>"										
-										+"</div>"	
-									+"</div>"
-								+"</td>"
-								+"<td class=btn>"
-									+"<input type=button class=repMod value='수정'><br><br>"
-									+"<input type=button class=repDel value='삭제'>"
-								+"</td>"								
-							+ "</tr>"
+						str += "<li class='list-item' data-rno='"+ this.rno +"'>"								
+									+"<div class='list-item__center'>"
+										+"<div class='list-item__title'>" + this.id + "</div>"
+										+"<div class='list-item__title' style='padding-top:7px;'>" + this.text + "</div>"
+										+"<div class='list-item__subtitle' style='text-align:right;'>" + this.wdate + "</div>"
+									+"</div>"																
+							+ "</li>"
 					});
 			// 만들어진 댓글 틀을 표시
 			$("#replies").html(str);
@@ -360,10 +283,10 @@ a:hover{ color:black;text-decoration:none; }
   </div>
 
   <div class="toolbar__right">
-		<input type=button value="수정" class="toolbar-button toolbar-button--outline" 
-		onclick=window.location='/board/update/${textNum}?page=${cri.page}'>
-		<input type=button value="삭제" class="toolbar-button toolbar-button--outline" 
-		onclick=window.location='/board/m/delete/${textNum}?page=${cri.page}'>
+		<span class="toolbar-button toolbar-button--outline" 
+		onclick=window.location='/board/update/${textNum}?page=${cri.page}'>수정</span>		
+		<span class="toolbar-button toolbar-button--outline" 
+		onclick=window.location='/board/m/delete/${textNum}?page=${cri.page}'>삭제</span>	
   </div>
 </div>
 
@@ -394,22 +317,22 @@ a:hover{ color:black;text-decoration:none; }
     <div style="float:left;" id=ccount></div>
     <div style="float:right;padding-right:20px;" id=repPage></div>
   </li>
+  <li class="list-item">
+    <div class="list-item__center">
+      <input type="text" class="text-input" placeholder="남긴이" name=id id=wid required>      
+    </div>    
+  </li>
+  <li class="list-item">
+    <div class="list-item__left">
+      <input type="text" class="text-input" placeholder="댓글 입력" name=text id=wtext required>
+    </div>
+    <div class="list-item__right">
+    	<button id=repAdd class="button">등록</button>
+    </div>
+  </li>
 </ul>
-    
-    <table class=type09>       
-        <tbody>
-    	<tr>
-    		<td id=input>
-    			<input type=text size=10 name=id id=wid placeholder="남긴이">　　
-    			<input type=text placeholder="댓글 입력" size=45 name=text id=wtext>
-    		</td>
-    		<td class=btn><button id=repAdd>등록</button></td>
-    	</tr>
-    	</tbody>
-    	<!-- 댓글 틀 출력 -->        
-        <tbody id=replies>        
-        </tbody>
-    </table>
+
+<ul class="list" id=replies></ul>
 
 </body>
 </html>

@@ -59,7 +59,7 @@ table.type09 td {
 		</table>
 		<table cellpadding=5 align=center>
 			<tr>
-				<td><input type=button value=취소 onclick=window.location='list'></td>
+				<td><input type=button value=취소 onclick=window.location='list?page=${cri.page}'></td>
 				<td><input type=submit value=쓰기></td>
 			</tr>
 		</table>

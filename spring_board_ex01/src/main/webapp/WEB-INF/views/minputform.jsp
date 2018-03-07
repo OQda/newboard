@@ -17,7 +17,7 @@
 <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
 <div class="toolbar">
   <div class="toolbar__left">
-    <span class="toolbar-button toolbar-button--quiet" onclick=window.location='list'>
+    <span class="toolbar-button toolbar-button--quiet" onclick=window.location='list?page=${cri.page}'>
       <i class="ion-android-arrow-back" style="font-size:32px; vertical-align:-6px;"></i>
     </span>
   </div>

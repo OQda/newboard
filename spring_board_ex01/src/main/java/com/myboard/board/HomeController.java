@@ -109,12 +109,14 @@ public class HomeController {
 	
 	// 글쓰기 버튼을 눌렀을 때 - 글쓰기 form으로 이동
 	@RequestMapping("insert")
-	public String insert() {	
+	public String insert(Criteria cri, Model model) {
+		model.addAttribute("cri", cri);
 		return "inputform";		
 	}
 	
 	@RequestMapping("m/insert")
-	public String minsert() {	
+	public String minsert(Criteria cri, Model model) {
+		model.addAttribute("cri", cri);
 		return "minputform";		
 	}
 	

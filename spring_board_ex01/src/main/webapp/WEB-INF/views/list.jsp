@@ -103,7 +103,7 @@ a:hover{ color:black;text-decoration:none; }
     </table>
     <table>
     	<tr>
-    		<td><input type=button value="글쓰기" onclick=window.location='insert'></td>
+    		<td><input type=button value="글쓰기" onclick=window.location='insert?page=${cri.page}'></td>
     	</tr>
     </table>
     <table>    

@@ -14,6 +14,7 @@
 <body>
 
 <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+<ons-page>
 <div class="toolbar">
   <div class="toolbar__left">    
   </div>
@@ -23,43 +24,54 @@
   </div>
 
   <div class="toolbar__right">
-    <span class="toolbar-button toolbar-button--outline" onclick=window.location='insert'>글쓰기</span>
+    <span class="toolbar-button toolbar-button--outline" onclick=window.location='insert?page=${cri.page}'>글쓰기</span>
   </div>
 </div>
 
-<ul class="list">
+<ons-list>
 	<c:forEach items="${textList}" var="text">
-		<li class="list-item list-item--tappable" onclick=location.href='view/${text.num}?page=${cri.page}'>
-			<div class="list-item__center">
+		<ons-list-item tappable onclick=location.href='view/${text.num}?page=${cri.page}'>
+			<div class="center">
 				<div class="list-item__title">
-        			${text.title} <c:if test="${text.rep != 0 }">[${text.rep}]</c:if>
+        			${text.title} <c:if test="${text.rep != 0 }"><font color=blue>[${text.rep}]</font></c:if>
 				</div>
 				
 				<div class="list-item__subtitle">
 					${text.id} 조회 : ${text.count}
 				</div>				
 			</div>
-			<div class="list-item__right">
+			<div class="right">
 					${text.pdate}
 			</div>
-		</li>
+		</ons-list-item>
 	</c:forEach>
-</ul>
-    
-<script>
-	var npage = ${cri.page};
-    $(function(){
-      // Initialization code
-      $('ons-button').on('click', function(e) {
-      	if (npage==1){
-        	location.href='http://192.168.23.101:8181/board/m/list?page=2';
-      	}else if(npage==2){
-      		location.href='http://192.168.23.101:8181/board/m/list?page=1';
-        }
-      })
-    });
-</script>
-<center><ons-button class="button--quiet">페이지 전환</ons-button></center>
-  
+</ons-list>
+
+<ons-bottom-toolbar>
+<div class="segment" style="width: 100%;padding-top:7px;">
+  <c:if test="${pageMaker.prev}">
+  <div class="segment__item">
+    <input type="radio" class="segment__input" onclick=location.href="list?page=${pageMaker.startPage - 1}">
+    <div class="segment__button">◀</div>
+  </div>
+  </c:if>
+  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
+  <div class="segment__item">
+    <input type="radio" class="segment__input" onclick=location.href="list?page=${num}"
+    <c:out value="${pageMaker.cri.page == num? 'checked' : ''}"></c:out>
+    >
+    <div class="segment__button">${num}</div>
+  </div>
+  </c:forEach>
+  <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+  <div class="segment__item">
+    <input type="radio" class="segment__input" onclick=location.href="list?page=${pageMaker.endPage + 1}">
+    <div class="segment__button">▶</div>
+  </div>
+  </c:if>
+</div>
+</ons-bottom-toolbar>
+
+</ons-page>
 </body>
 </html>
